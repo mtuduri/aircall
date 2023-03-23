@@ -5,34 +5,23 @@ import Header from './layout/Header/Header.jsx';
 import ActivityPage from './pages/ActivityPage/ActivityPage.jsx';
 import ActivityDetailPage from './pages/ActivityDetailPage/ActivityDetailPage.jsx';
 
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Container, ContainerView } from './App.styles.jsx';
 const App = () => {
   return (
-    <div className="container">
+    <Container>
       <Header />
-      <div className="container-view">
+      <ContainerView>
         <Router>
           <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/detail">detail</Link>
-                </li>
-              </ul>
-            </nav>
-
             <Routes>
               <Route path="/detail" element={<ActivityDetailPage />} />
               <Route path="/" element={<ActivityPage />} />
             </Routes>
           </div>
         </Router>
-      </div>
-    </div>
+      </ContainerView>
+    </Container>
   );
 };
 

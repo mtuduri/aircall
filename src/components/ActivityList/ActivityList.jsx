@@ -1,11 +1,12 @@
 import React from 'react';
 import ActivityListItem from './ActivityListItem/ActivityListItem.jsx';
+import { ListContainer } from './ActivityList.styles.jsx';
 
 const ActivityList = ({ activities }) => {
   return (
-    <div>
+    <ListContainer>
       {activities && activities.map((item) => <ActivityListItem key={item.id} item={item} />)}
-    </div>
+    </ListContainer>
   );
 };
 export default ActivityList;
