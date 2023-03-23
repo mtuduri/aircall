@@ -15,7 +15,7 @@ const App = () => {
         <Router>
           <div>
             <Routes>
-              <Route path="/detail" element={<ActivityDetailPage />} />
+              <Route path="/activity/:id" element={<ActivityDetailPage />} />
               <Route path="/" element={<ActivityPage />} />
             </Routes>
           </div>

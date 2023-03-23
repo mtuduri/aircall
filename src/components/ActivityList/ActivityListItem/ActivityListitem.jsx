@@ -1,21 +1,23 @@
 import React from 'react';
 import { Title, ItemContainer, ActivityIcon, Date } from './ActivityListItem.styles.jsx';
-import moment from 'moment';
+import { formatTime } from '../../../utils/DateUtils.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const ActivityListItem = ({ item }) => {
-  const formatDate = (date) => {
-    const momentDate = moment(date);
-    return momentDate.format('hh:mm A');
+  const navigate = useNavigate();
+
+  const hanldeClick = () => {
+    navigate(`/activity/${item.id}`);
   };
 
   return (
     <React.Fragment>
       {item && (
-        <ItemContainer>
+        <ItemContainer onClick={hanldeClick}>
           <ActivityIcon>{item.direction === 'outbound' ? 'saliente' : 'entrante'}</ActivityIcon>
           <Title>{item.from}</Title>
           <p>tried to call on {item.via}</p>
-          <Date>{formatDate(item.created_at)}</Date>
+          <Date>{formatTime(item.created_at)}</Date>
         </ItemContainer>
       )}
     </React.Fragment>

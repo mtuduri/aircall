@@ -4,6 +4,7 @@ export const ItemContainer = styled.div`
   border: 1px solid #eeeeee;
   border-radius: 8px;
   display: flex;
+  cursor: pointer;
 `;
 
 export const Title = styled.h1`
