@@ -5,20 +5,13 @@ import Header from './layout/Header/Header.jsx';
 import ActivityPage from './pages/ActivityPage/ActivityPage.jsx';
 import ActivityDetailPage from './pages/ActivityDetailPage/ActivityDetailPage.jsx';
 
-
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div className='container'>
+    <div className="container">
       <Header />
       <div className="container-view">
-
         <Router>
           <div>
             <nav>
