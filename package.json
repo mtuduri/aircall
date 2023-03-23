@@ -15,6 +15,7 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
+    "@material-ui/icons": "^4.11.3",
     "axios": "^0.25.0",
     "moment": "^2.29.4",
     "react": "^16.3.1",
