@@ -13,12 +13,10 @@ const App = () => {
       <Header />
       <ContainerView>
         <Router>
-          <div>
-            <Routes>
-              <Route path="/activity/:id" element={<ActivityDetailPage />} />
-              <Route path="/" element={<ActivityPage />} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/activity/:id" element={<ActivityDetailPage />} />
+            <Route path="/" element={<ActivityPage />} />
+          </Routes>
         </Router>
       </ContainerView>
     </Container>

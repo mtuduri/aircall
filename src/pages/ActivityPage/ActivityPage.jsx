@@ -14,10 +14,6 @@ const Activitypage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  return (
-    <div>
-      <ActivityList activities={activities}></ActivityList>
-    </div>
-  );
+  return <ActivityList activities={activities}></ActivityList>;
 };
 export default Activitypage;

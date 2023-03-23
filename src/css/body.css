@@ -13,3 +13,6 @@ body {
   color: #333333;
   line-height: 1;
 }
+html, body {
+  height: 100%;
+}
