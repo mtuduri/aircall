@@ -1,5 +1,5 @@
 import React from 'react';
-import ActivityListItem from './ActivityListItem/ActivityListItem.jsx';
+import ActivityListItem from './ActivityListItem/ActivityListitem.jsx';
 import { ListContainer } from './ActivityList.styles.jsx';
 
 const ActivityList = ({ activities }) => {
