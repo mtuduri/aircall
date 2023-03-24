@@ -12,7 +12,8 @@
     "build": "webpack --mode production",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -25,6 +26,8 @@
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.6",
     "babel-core": "6.26.*",
     "babel-loader": "7.1.*",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
@@ -38,7 +41,9 @@
     "eslint-plugin-react": "^7.32.2",
     "html-loader": "0.5.*",
     "html-webpack-plugin": "3.2.*",
+    "jest": "^23.6.0",
     "prettier": "^2.8.6",
+    "react-test-renderer": "^16.14.0",
     "style-loader": "0.23.*",
     "terser-webpack-plugin": "^4.2.3",
     "webpack": "4.29.*",
