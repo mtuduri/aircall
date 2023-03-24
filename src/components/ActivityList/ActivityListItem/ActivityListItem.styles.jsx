@@ -69,3 +69,24 @@ export const ThreeDots = styled.div`
   background-image: radial-gradient(circle, #b6b6b6 1px, transparent 1px);
   background-size: 100% 33.33%;
 `;
+
+export const Counter = styled.div`
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  color: #fff;
+  background-color: #ee481b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.75rem;
+`;
+
+export const CounterContainer = styled.div`
+  display: flex;
+  gap: 4px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+`;

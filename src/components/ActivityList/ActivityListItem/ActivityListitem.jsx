@@ -9,7 +9,9 @@ import {
   DateContainer,
   Date,
   DateType,
-  ThreeDots
+  ThreeDots,
+  CounterContainer,
+  Counter
 } from './ActivityListItem.styles.jsx';
 import { formatTime, formatTimeType } from '../../../utils/DateUtils.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -45,7 +47,10 @@ const ActivityListItem = ({ item }) => {
               <CallType />
             </CallTypeContainer>
             <CallInfoContainer>
-              <Title>{item.from}</Title>
+              <CounterContainer>
+                <Title>{item.from}</Title>
+                {item.count && <Counter>{item.count}</Counter>}
+              </CounterContainer>
               <Subtitle>tried to call on {item.via}</Subtitle>
             </CallInfoContainer>
           </LeftContainer>

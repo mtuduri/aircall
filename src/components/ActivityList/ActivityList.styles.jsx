@@ -1,13 +1,23 @@
 import styled from 'styled-components';
 
-export const ListContainer = styled.div`
+export const ActivitiesContainer = styled.div`
   min-height: 0;
   flex: 1;
   overflow: auto;
   max-height: calc(666px - 120px);
   display: flex;
-  gap: 16px;
   flex-direction: column;
+`;
+
+export const GroupContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 export const ArchiveAllCalls = styled.div`
@@ -22,4 +32,18 @@ export const ArchiveAllCalls = styled.div`
   }
   gap: 16px;
   font-weight: bold;
+`;
+
+export const DashedContainer = styled.div`
+  border-bottom: 1px dashed #bdbdbc;
+  text-align: center;
+  height: 8px;
+  margin-bottom: 10px;
+  color: #bdbdbc;
+  margin: 16px 0;
+`;
+export const DashedText = styled.span`
+  padding: 0 12px;
+  font-weight: bold;
+  background: #fff;
 `;

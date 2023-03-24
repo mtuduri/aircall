@@ -1,32 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { formatTime, formatDate } from '../../utils/DateUtils.jsx';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import useActivityApi from '../../hooks/activitiesHook.jsx';
+import { formatDate, formatTime } from '../../utils/DateUtils.jsx';
 
 const ActivityDetailpage = () => {
-  const [details, setDetails] = useState();
   const { id } = useParams();
+  const { activity, getActivity } = useActivityApi();
 
   useEffect(() => {
-    axios.get(`https://cerulean-marlin-wig.cyclic.app/activities/${id}`).then((result) => {
-      setDetails(result.data);
-    });
+    getActivity(id);
   }, []);
 
   return (
     <div>
-      {details && (
+      {activity && (
         <div>
+          <Link to="/">go back</Link>
           <h3>Activity details:</h3>
           <div>
-            <div>Date: {formatDate(details.created_at)}</div>
-            <div>Time: {formatTime(details.created_at)}</div>
-            <div>Direction: {details.direction}</div>
-            <div>From: {details.from}</div>
-            <div>To: {details.to}</div>
-            <div>Via: {details.via}</div>
-            <div>Duration: {details.duration + ` seconds`}</div>
-            <div>Call type: {details.call_type}</div>
+            <div>Date: {formatDate(activity.created_at)}</div>
+            <div>Time: {formatTime(activity.created_at)}</div>
+            <div>Direction: {activity.direction}</div>
+            <div>From: {activity.from}</div>
+            <div>To: {activity.to}</div>
+            <div>Via: {activity.via}</div>
+            <div>Duration: {activity.duration + ` seconds`}</div>
+            <div>Call type: {activity.call_type}</div>
           </div>
         </div>
       )}

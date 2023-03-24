@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ActivityList from '../../components/ActivityList/ActivityList.jsx';
-import axios from 'axios';
+import useActivityApi from '../../hooks/activitiesHook.jsx';
 
 const Activitypage = () => {
-  const [activities, setActivities] = useState([]);
+  const { groupedActivities, getAll, archiveAll } = useActivityApi();
 
   useEffect(() => {
-    axios
-      .get('https://cerulean-marlin-wig.cyclic.app/activities')
-      .then((res) => {
-        setActivities(res.data);
-      })
-      .catch((err) => console.log(err));
+    getAll();
   }, []);
 
-  const archiveAll = () => {
-    const promises = [];
-    activities.forEach((a) => {
-      const promise = axios.post(`https://aircall-job.herokuapp.com/activities/${a.id}`, {
-        is_archived: true
-      });
-      promises.push(promise);
-    });
-    Promise.all(promises).then(() => {});
-  };
-
-  return <ActivityList activities={activities} archiveAll={archiveAll}></ActivityList>;
+  return <ActivityList activities={groupedActivities} archiveAll={archiveAll}></ActivityList>;
 };
 export default Activitypage;
