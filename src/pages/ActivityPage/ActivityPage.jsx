@@ -14,7 +14,10 @@ const Activitypage = () => {
     <React.Fragment>
       {loadingGroupedActivities && <Loader />}
       {!loadingGroupedActivities && groupedActivities && (
-        <ActivityList activities={groupedActivities} archiveAll={archiveAll}></ActivityList>
+        <ActivityList
+          activities={groupedActivities}
+          archiveFn={archiveAll}
+          archiveText="Archive all calls"></ActivityList>
       )}
       ;
     </React.Fragment>

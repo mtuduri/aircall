@@ -10,12 +10,12 @@ import {
 } from './ActivityList.styles.jsx';
 import ActivityListItem from './ActivityListItem/ActivityListitem.jsx';
 
-const ActivityList = ({ activities, archiveAll }) => {
+const ActivityList = ({ activities, archiveFn, archiveText }) => {
   const groups = (activities && Object.keys(activities).reverse()) || [];
   return (
     <ActivitiesContainer>
-      <ArchiveAllCalls onClick={archiveAll}>
-        <ArchiveOutlined /> Archive all calls
+      <ArchiveAllCalls onClick={archiveFn}>
+        <ArchiveOutlined /> {archiveText}
       </ArchiveAllCalls>
       {groups &&
         groups.map((item, index) => (

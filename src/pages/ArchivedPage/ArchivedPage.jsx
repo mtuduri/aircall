@@ -17,7 +17,8 @@ const ArchivedPage = () => {
       {!loadingGroupedActivities && groupedArchivedActivities && (
         <ActivityList
           activities={groupedArchivedActivities}
-          archiveAll={unArchiveAll}></ActivityList>
+          archiveFn={unArchiveAll}
+          archiveText="Unarchive all calls"></ActivityList>
       )}
     </React.Fragment>
   );

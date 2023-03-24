@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader.jsx';
 import useActivityApi from '../../hooks/activitiesHook.jsx';
 import { formatDate, formatTime } from '../../utils/DateUtils.jsx';
+import { Container, FieldContainer, Title } from './ActivityDetailPage.styles.jsx';
 
 const ActivityDetailpage = () => {
   const { id } = useParams();
@@ -13,25 +14,44 @@ const ActivityDetailpage = () => {
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       {loadingActivity && <Loader />}
       {!loadingActivity && activity && (
-        <div>
+        <Container>
           <Link to="/">go back</Link>
-          <h3>Activity details:</h3>
-          <div>
-            <div>Date: {formatDate(activity.created_at)}</div>
-            <div>Time: {formatTime(activity.created_at)}</div>
-            <div>Direction: {activity.direction}</div>
-            <div>From: {activity.from}</div>
-            <div>To: {activity.to}</div>
-            <div>Via: {activity.via}</div>
-            <div>Duration: {activity.duration + ` seconds`}</div>
-            <div>Call type: {activity.call_type}</div>
-          </div>
-        </div>
+          <Title>Activity details:</Title>
+          <FieldContainer>
+            <div>
+              <strong>Date:</strong> {formatDate(activity.created_at)}
+            </div>
+            <div>
+              <strong>Time:</strong> {formatTime(activity.created_at)}
+            </div>
+            <div>
+              <strong>Direction:</strong> {activity.direction}
+            </div>
+            <div>
+              <strong>From:</strong>
+              {activity.from}
+            </div>
+            <div>
+              <strong>To:</strong>
+              {activity.to}
+            </div>
+            <div>
+              <strong>Via:</strong> {activity.via}
+            </div>
+            <div>
+              <strong>Duration:</strong>
+              {activity.duration + ` seconds`}
+            </div>
+            <div>
+              <strong>Call type:</strong> {activity.call_type}
+            </div>
+          </FieldContainer>
+        </Container>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 export default ActivityDetailpage;

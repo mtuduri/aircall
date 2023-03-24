@@ -33,7 +33,8 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   font-weight: bold;
   height: 100%;
+  border-bottom: 4px solid transparent;
   &.active {
-    border-bottom: 3px solid red;
+    border-bottom: 4px solid #fc5624;
   }
 `;
