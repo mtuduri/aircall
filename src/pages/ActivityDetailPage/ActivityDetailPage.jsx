@@ -25,7 +25,7 @@ const ActivityDetailpage = () => {
   return (
     <React.Fragment>
       {loadingActivity && <Loader />}
-      {!loadingActivity && activity && (
+      {!loadingActivity && activity && activity.id && (
         <Container>
           <Link to={activity.is_archived ? '/archived' : '/'}>go back</Link>
           <Title>Activity details:</Title>
