@@ -6,26 +6,22 @@ import ActivityDetailPage from './pages/ActivityDetailPage/ActivityDetailPage.js
 import ActivityPage from './pages/ActivityPage/ActivityPage.jsx';
 import ArchivedPage from './pages/ArchivedPage/ArchivedPage.jsx';
 
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container, ContainerView } from './App.styles.jsx';
 
 const App = () => {
   return (
     <Container>
-      <Header />
-      <ContainerView>
-        <Router>
-          <div>
-            <Link to="/">Activity</Link>
-            <Link to="/archived">Archived</Link>
-          </div>
+      <Router>
+        <Header />
+        <ContainerView>
           <Routes>
             <Route path="/activity/:id" element={<ActivityDetailPage />} />
             <Route path="/" element={<ActivityPage />} />
             <Route path="/archived" element={<ArchivedPage />} />
           </Routes>
-        </Router>
-      </ContainerView>
+        </ContainerView>
+      </Router>
     </Container>
   );
 };
