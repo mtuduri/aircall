@@ -14,6 +14,17 @@ const Activitypage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  return <ActivityList activities={activities}></ActivityList>;
+  const archiveAll = () => {
+    const promises = [];
+    activities.forEach((a) => {
+      const promise = axios.post(`https://aircall-job.herokuapp.com/activities/${a.id}`, {
+        is_archived: true
+      });
+      promises.push(promise);
+    });
+    Promise.all(promises).then(() => {});
+  };
+
+  return <ActivityList activities={activities} archiveAll={archiveAll}></ActivityList>;
 };
 export default Activitypage;

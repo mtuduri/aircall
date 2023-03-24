@@ -9,3 +9,17 @@ export const ListContainer = styled.div`
   gap: 16px;
   flex-direction: column;
 `;
+
+export const ArchiveAllCalls = styled.div`
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 16px 0 16px 16px;
+  &:hover {
+    background-color: #afe9b770;
+  }
+  gap: 16px;
+  font-weight: bold;
+`;

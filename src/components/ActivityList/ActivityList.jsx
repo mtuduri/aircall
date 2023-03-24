@@ -1,12 +1,18 @@
 import React from 'react';
 import ActivityListItem from './ActivityListItem/ActivityListitem.jsx';
-import { ListContainer } from './ActivityList.styles.jsx';
+import { ListContainer, ArchiveAllCalls } from './ActivityList.styles.jsx';
+import { ArchiveOutlined } from '@material-ui/icons';
 
-const ActivityList = ({ activities }) => {
+const ActivityList = ({ activities, archiveAll }) => {
   return (
-    <ListContainer>
-      {activities && activities.map((item) => <ActivityListItem key={item.id} item={item} />)}
-    </ListContainer>
+    <div>
+      <ListContainer>
+        <ArchiveAllCalls onClick={archiveAll}>
+          <ArchiveOutlined /> Archive all calls
+        </ArchiveAllCalls>
+        {activities && activities.map((item) => <ActivityListItem key={item.id} item={item} />)}
+      </ListContainer>
+    </div>
   );
 };
 export default ActivityList;
