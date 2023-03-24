@@ -53,7 +53,7 @@ const ActivityListItem = ({ item }) => {
   return (
     <React.Fragment>
       {item && (
-        <ItemContainer onClick={hanldeClick}>
+        <ItemContainer onClick={hanldeClick} id={item.id}>
           <LeftContainer>
             <CallTypeContainer>
               <CallType />

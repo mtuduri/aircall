@@ -1,15 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import { HashRouter } from 'react-router-dom';
 import Header from './Header';
 import React from 'react';
 import '@testing-library/jest-dom';
+import { routerWrapper } from '../../tests/test.utils';
 
-test('renders learn react link', () => {
-  render(
-    <HashRouter>
-      <Header />
-    </HashRouter>
-  );
-  const linkElement = screen.getByText(/Activity/i);
-  expect(linkElement).toBeInTheDocument();
+test('Nav links should be visible', () => {
+  render(<Header />, { wrapper: routerWrapper });
+  const activityLink = screen.getByText(/Activity/i);
+  expect(activityLink).toBeInTheDocument();
+  const archivedLink = screen.getByText(/Archived/i);
+  expect(archivedLink).toBeInTheDocument();
 });
