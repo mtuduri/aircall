@@ -24,9 +24,15 @@ const ActivityList = ({ activities, archiveFn, archiveText }) => {
               <DashedText>{item}</DashedText>
             </DashedContainer>
             <ListContainer>
-              {activities[item].map((a) => (
-                <ActivityListItem key={a.id} item={a} />
-              ))}
+              {activities[item]
+                .sort((a, b) => {
+                  const dateA = new Date(a.created_at);
+                  const dateB = new Date(b.created_at);
+                  return dateB - dateA;
+                })
+                .map((a) => (
+                  <ActivityListItem key={a.id} item={a} />
+                ))}
             </ListContainer>
           </GroupContainer>
         ))}
