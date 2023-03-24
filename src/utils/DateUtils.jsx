@@ -18,3 +18,7 @@ export const formatDate = (date) => {
 export const greatherOrEqual = (date1, date2) => {
   return moment(date1).diff(moment(date2)) >= 0;
 };
+
+export const greatherThan5min = (date1, date2) => {
+  return moment(date1).diff(moment(date2), 'minutes') >= 5;
+};

@@ -36,12 +36,12 @@ const ActivityListItem = ({ item }) => {
       case 'voicemail':
         return <Voicemail style={{ color: 'red' }} />;
       case 'missed':
-        if (item.direction === 'outbond') {
+        if (item.direction === 'outbound') {
           return <PhoneMissed style={{ color: 'red' }} />;
         }
         return <PhoneCallback style={{ color: 'red' }} />;
       case 'answered':
-        if (item.direction === 'outbond') {
+        if (item.direction === 'outbound') {
           return <PhoneForwarded style={{ color: 'green' }} />;
         }
         return <Phone style={{ color: 'green' }} />;
@@ -60,7 +60,7 @@ const ActivityListItem = ({ item }) => {
             </CallTypeContainer>
             <CallInfoContainer>
               <CounterContainer>
-                <Title>{item.from}</Title>
+                <Title>{item.direction === 'outbound' ? item.to : item.from}</Title>
                 {item.count && <Counter>{item.count}</Counter>}
               </CounterContainer>
               {item.via && <Subtitle>via {item.via}</Subtitle>}

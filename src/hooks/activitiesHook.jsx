@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { formatDate, greatherOrEqual } from '../utils/DateUtils.jsx';
+import { formatDate, greatherOrEqual, greatherThan5min } from '../utils/DateUtils.jsx';
 
-const BASE_URL = 'https://cerulean-marlin-wig.cyclic.app/';
+const BASE_URL = 'https://cerulean-marlin-wig.cyclic.app';
 
 const useActivityApi = () => {
   const [archived, setArchived] = useState([]);
@@ -20,7 +20,8 @@ const useActivityApi = () => {
       a1.via === a2.via &&
       a1.direction === a2.direction &&
       a1.is_archived === a2.is_archived &&
-      a1.call_type === a2.call_type
+      a1.call_type === a2.call_type &&
+      !greatherThan5min(a1.created_at, a2.created_at)
     );
   };
 
