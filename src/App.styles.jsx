@@ -10,4 +10,5 @@ export const Container = styled.div`
 
 export const ContainerView = styled.div`
   padding: 20px;
+  background-color: #fcfcfb;
 `;

@@ -14,3 +14,7 @@ export const formatDate = (date) => {
   const momentDate = moment(date);
   return momentDate.format('LL');
 };
+
+export const greatherOrEqual = (date1, date2) => {
+  return moment(date1).diff(moment(date2)) >= 0;
+};

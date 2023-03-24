@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { formatDate } from '../utils/DateUtils.jsx';
+import { formatDate, greatherOrEqual } from '../utils/DateUtils.jsx';
 
 const BASE_URL = 'https://cerulean-marlin-wig.cyclic.app/';
 
@@ -15,7 +15,12 @@ const useActivityApi = () => {
 
   const isActivityEqual = (a1, a2) => {
     return (
-      a1.from === a2.from && a1.to === a2.to && a1.via === a2.via && a1.direction === a2.direction
+      a1.from === a2.from &&
+      a1.to === a2.to &&
+      a1.via === a2.via &&
+      a1.direction === a2.direction &&
+      a1.is_archived === a2.is_archived &&
+      a1.call_type === a2.call_type
     );
   };
 
@@ -42,6 +47,9 @@ const useActivityApi = () => {
           } else {
             acc[foundIndex].count = acc[foundIndex].count + 1;
           }
+          if (greatherOrEqual(current.created_at, acc[foundIndex].created_at)) {
+            acc[foundIndex].created_at = current.created_at;
+          }
         } else {
           acc.push(current);
         }
@@ -62,10 +70,10 @@ const useActivityApi = () => {
 
   const processData = (list) => {
     const { archived, unarchived } = divideByArchived(list);
-    const archivedGroup = groupActivities(archived);
-    setGroupedActivities(archivedGroup);
     const unarchivedGroup = groupActivities(unarchived);
-    setGroupedArchivedActivities(unarchivedGroup);
+    setGroupedActivities(unarchivedGroup);
+    const archivedGroup = groupActivities(archived);
+    setGroupedArchivedActivities(archivedGroup);
     setLoadingGroupedActivities(false);
     setArchived(archived);
     setUnarchived(unarchived);
@@ -80,6 +88,7 @@ const useActivityApi = () => {
       })
       .catch((err) => {
         console.log(err);
+        alert('Something went wrong');
         setLoadingGroupedActivities(false);
       });
   };
@@ -91,19 +100,22 @@ const useActivityApi = () => {
       .then((result) => {
         setActivity(result.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        alert('Something went wrong');
+        console.log(err);
+      })
       .finally(() => setLoadingActivity(false));
   };
 
   const archiveActivity = (id, value) => {
-    axios
+    return axios
       .post(`${BASE_URL}/activities/${id}`, {
         is_archived: value
       })
-      .then(() => {
-        getAll();
-      })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert('Something went wrong');
+        console.log(err);
+      });
   };
 
   const archive = (arr, value) => {
@@ -118,7 +130,10 @@ const useActivityApi = () => {
       .then(() => {
         getAll();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        alert('Something went wrong');
+        console.log(err);
+      });
   };
 
   const archiveAll = () => {

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ItemContainer = styled.div`
+  background-color: #fff;
   border: 1px solid #eeeeee;
   border-radius: 16px;
   display: flex;

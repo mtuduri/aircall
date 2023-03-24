@@ -21,6 +21,7 @@ export const ListContainer = styled.div`
 `;
 
 export const ArchiveAllCalls = styled.div`
+  background-color: #fff;
   border: 1px solid #eeeeee;
   border-radius: 16px;
   display: flex;
@@ -45,6 +46,6 @@ export const DashedContainer = styled.div`
 export const DashedText = styled.span`
   padding: 0 12px;
   font-weight: bold;
-  background: #fff;
+  background: #fcfcfb;
   letter-spacing: 1px;
 `;

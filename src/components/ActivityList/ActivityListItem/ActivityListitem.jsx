@@ -34,19 +34,19 @@ const ActivityListItem = ({ item }) => {
   const CallType = () => {
     switch (item.call_type) {
       case 'voicemail':
-        return <Voicemail />;
+        return <Voicemail style={{ color: 'red' }} />;
       case 'missed':
         if (item.direction === 'outbond') {
-          return <PhoneMissed />;
+          return <PhoneMissed style={{ color: 'red' }} />;
         }
-        return <PhoneCallback />;
+        return <PhoneCallback style={{ color: 'red' }} />;
       case 'answered':
         if (item.direction === 'outbond') {
-          return <PhoneForwarded />;
+          return <PhoneForwarded style={{ color: 'green' }} />;
         }
-        return <Phone />;
+        return <Phone style={{ color: 'green' }} />;
       default:
-        return <Error />;
+        return <Error style={{ color: 'red' }} />;
     }
   };
 
@@ -63,7 +63,7 @@ const ActivityListItem = ({ item }) => {
                 <Title>{item.from}</Title>
                 {item.count && <Counter>{item.count}</Counter>}
               </CounterContainer>
-              <Subtitle>tried to call on {item.via}</Subtitle>
+              {item.via && <Subtitle>via {item.via}</Subtitle>}
             </CallInfoContainer>
           </LeftContainer>
           <DateContainer>

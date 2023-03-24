@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader.jsx';
 import useActivityApi from '../../hooks/activitiesHook.jsx';
 import { formatDate, formatTime } from '../../utils/DateUtils.jsx';
@@ -8,6 +8,7 @@ import { Container, FieldContainer, Title } from './ActivityDetailPage.styles.js
 
 const ActivityDetailpage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { activity, loadingActivity, getActivity, archiveActivity } = useActivityApi();
 
   useEffect(() => {
@@ -15,7 +16,10 @@ const ActivityDetailpage = () => {
   }, []);
 
   const archive = () => {
-    archiveActivity(id, !activity.is_archived);
+    const newValue = !activity.is_archived;
+    archiveActivity(id, !activity.is_archived).then(() => {
+      navigate(newValue ? '/archived' : '/');
+    });
   };
 
   return (
