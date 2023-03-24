@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import ActivityList from '../../components/ActivityList/ActivityList.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
 import useActivityApi from '../../hooks/activitiesHook.jsx';
+import { NoActivity } from './ArchivedPage.styles.jsx';
 
 const ArchivedPage = () => {
   const { groupedArchivedActivities, loadingGroupedActivities, getAll, unArchiveAll } =
@@ -19,6 +20,9 @@ const ArchivedPage = () => {
           activities={groupedArchivedActivities}
           archiveFn={unArchiveAll}
           archiveText="Unarchive all calls"></ActivityList>
+      )}
+      {!loadingGroupedActivities && !groupedArchivedActivities && (
+        <NoActivity> There is no archived activity</NoActivity>
       )}
     </React.Fragment>
   );

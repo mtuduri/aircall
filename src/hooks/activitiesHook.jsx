@@ -51,7 +51,7 @@ const useActivityApi = () => {
           if (greatherOrEqual(current.created_at, acc[foundIndex].created_at)) {
             acc[foundIndex].created_at = current.created_at;
           }
-        } else {
+        } else if (current.to || current.from) {
           acc.push(current);
         }
         return acc;
@@ -88,8 +88,7 @@ const useActivityApi = () => {
         processData(res.data);
       })
       .catch((err) => {
-        console.log(err);
-        alert('Something went wrong');
+        console.error(err);
         setLoadingGroupedActivities(false);
       });
   };
@@ -102,8 +101,7 @@ const useActivityApi = () => {
         setActivity(result.data);
       })
       .catch((err) => {
-        alert('Something went wrong');
-        console.log(err);
+        console.error(err);
       })
       .finally(() => setLoadingActivity(false));
   };
@@ -114,12 +112,12 @@ const useActivityApi = () => {
         is_archived: value
       })
       .catch((err) => {
-        alert('Something went wrong');
-        console.log(err);
+        console.error(err);
       });
   };
 
   const archive = (arr, value) => {
+    setLoadingGroupedActivities(true);
     const promises = [];
     arr.forEach((a) => {
       const promise = axios.patch(`${BASE_URL}/activities/${a.id}`, {
@@ -128,12 +126,11 @@ const useActivityApi = () => {
       promises.push(promise);
     });
     Promise.all(promises)
-      .then(() => {
+      .then(() => {})
+      .finally(() => {
+        setGroupedActivities(null);
+        setGroupedArchivedActivities(null);
         getAll();
-      })
-      .catch((err) => {
-        alert('Something went wrong');
-        console.log(err);
       });
   };
 
