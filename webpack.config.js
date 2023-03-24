@@ -1,6 +1,14 @@
+const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, 'dist')
+  },
   module: {
     rules: [
       {
@@ -25,7 +33,12 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: './public/index.html',
       filename: './index.html'
