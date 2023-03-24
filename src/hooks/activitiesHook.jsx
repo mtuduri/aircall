@@ -5,7 +5,8 @@ import { formatDate } from '../utils/DateUtils.jsx';
 const BASE_URL = 'https://cerulean-marlin-wig.cyclic.app/';
 
 const useActivityApi = () => {
-  const [activities, setActivities] = useState([]);
+  const [archived, setArchived] = useState([]);
+  const [unarchived, setUnarchived] = useState([]);
   const [loadingActivity, setLoadingActivity] = useState(false);
   const [activity, setActivity] = useState([]);
   const [loadingGroupedActivities, setLoadingGroupedActivities] = useState(false);
@@ -66,6 +67,8 @@ const useActivityApi = () => {
     const unarchivedGroup = groupActivities(unarchived);
     setGroupedArchivedActivities(unarchivedGroup);
     setLoadingGroupedActivities(false);
+    setArchived(archived);
+    setUnarchived(unarchived);
   };
 
   const getAll = () => {
@@ -73,7 +76,6 @@ const useActivityApi = () => {
     axios
       .get(`${BASE_URL}/activities`)
       .then((res) => {
-        setActivities(res.data);
         processData(res.data);
       })
       .catch((err) => {
@@ -95,7 +97,7 @@ const useActivityApi = () => {
 
   const archiveAll = () => {
     const promises = [];
-    activities.forEach((a) => {
+    unarchived.forEach((a) => {
       const promise = axios.post(`${BASE_URL}/activities/${a.id}`, {
         is_archived: true
       });
@@ -108,7 +110,7 @@ const useActivityApi = () => {
 
   const unArchiveAll = () => {
     const promises = [];
-    activities.forEach((a) => {
+    archived.forEach((a) => {
       const promise = axios.post(`${BASE_URL}/activities/${a.id}`, {
         is_archived: true
       });
