@@ -11,7 +11,7 @@ import {
 import ActivityListItem from './ActivityListItem/ActivityListitem.jsx';
 
 const ActivityList = ({ activities, archiveAll }) => {
-  const groups = (activities && Object.keys(activities)) || [];
+  const groups = (activities && Object.keys(activities).reverse()) || [];
   return (
     <ActivitiesContainer>
       <ArchiveAllCalls onClick={archiveAll}>

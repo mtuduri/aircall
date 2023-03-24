@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Loader from '../../components/Loader/Loader.jsx';
 import useActivityApi from '../../hooks/activitiesHook.jsx';
 import { formatDate, formatTime } from '../../utils/DateUtils.jsx';
 
 const ActivityDetailpage = () => {
   const { id } = useParams();
-  const { activity, getActivity } = useActivityApi();
+  const { activity, loadingActivity, getActivity } = useActivityApi();
 
   useEffect(() => {
     getActivity(id);
@@ -13,7 +14,8 @@ const ActivityDetailpage = () => {
 
   return (
     <div>
-      {activity && (
+      {loadingActivity && <Loader />}
+      {!loadingActivity && activity && (
         <div>
           <Link to="/">go back</Link>
           <h3>Activity details:</h3>

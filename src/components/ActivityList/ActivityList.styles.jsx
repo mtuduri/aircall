@@ -46,4 +46,5 @@ export const DashedText = styled.span`
   padding: 0 12px;
   font-weight: bold;
   background: #fff;
+  letter-spacing: 1px;
 `;

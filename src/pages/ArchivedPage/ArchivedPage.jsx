@@ -3,8 +3,9 @@ import ActivityList from '../../components/ActivityList/ActivityList.jsx';
 import Loader from '../../components/Loader/Loader.jsx';
 import useActivityApi from '../../hooks/activitiesHook.jsx';
 
-const Activitypage = () => {
-  const { groupedActivities, loadingGroupedActivities, getAll, archiveAll } = useActivityApi();
+const ArchivedPage = () => {
+  const { groupedArchivedActivities, loadingGroupedActivities, getAll, unArchiveAll } =
+    useActivityApi();
 
   useEffect(() => {
     getAll();
@@ -13,11 +14,12 @@ const Activitypage = () => {
   return (
     <React.Fragment>
       {loadingGroupedActivities && <Loader />}
-      {!loadingGroupedActivities && groupedActivities && (
-        <ActivityList activities={groupedActivities} archiveAll={archiveAll}></ActivityList>
+      {!loadingGroupedActivities && groupedArchivedActivities && (
+        <ActivityList
+          activities={groupedArchivedActivities}
+          archiveAll={unArchiveAll}></ActivityList>
       )}
-      ;
     </React.Fragment>
   );
 };
-export default Activitypage;
+export default ArchivedPage;

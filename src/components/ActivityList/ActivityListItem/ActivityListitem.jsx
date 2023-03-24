@@ -15,7 +15,14 @@ import {
 } from './ActivityListItem.styles.jsx';
 import { formatTime, formatTimeType } from '../../../utils/DateUtils.jsx';
 import { useNavigate } from 'react-router-dom';
-import { PhoneMissed, PhoneForwarded, Phone } from '@material-ui/icons';
+import {
+  PhoneMissed,
+  PhoneForwarded,
+  Phone,
+  PhoneCallback,
+  Voicemail,
+  Error
+} from '@material-ui/icons';
 
 const ActivityListItem = ({ item }) => {
   const navigate = useNavigate();
@@ -26,15 +33,20 @@ const ActivityListItem = ({ item }) => {
 
   const CallType = () => {
     switch (item.call_type) {
+      case 'voicemail':
+        return <Voicemail />;
       case 'missed':
-        return <PhoneMissed />;
+        if (item.direction === 'outbond') {
+          return <PhoneMissed />;
+        }
+        return <PhoneCallback />;
       case 'answered':
         if (item.direction === 'outbond') {
           return <PhoneForwarded />;
         }
         return <Phone />;
       default:
-        return <React.Fragment></React.Fragment>;
+        return <Error />;
     }
   };
 

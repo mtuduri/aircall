@@ -6,13 +6,29 @@ const BASE_URL = 'https://cerulean-marlin-wig.cyclic.app/';
 
 const useActivityApi = () => {
   const [activities, setActivities] = useState([]);
+  const [loadingActivity, setLoadingActivity] = useState(false);
   const [activity, setActivity] = useState([]);
+  const [loadingGroupedActivities, setLoadingGroupedActivities] = useState(false);
   const [groupedActivities, setGroupedActivities] = useState([]);
+  const [groupedArchivedActivities, setGroupedArchivedActivities] = useState([]);
 
   const isActivityEqual = (a1, a2) => {
     return (
       a1.from === a2.from && a1.to === a2.to && a1.via === a2.via && a1.direction === a2.direction
     );
+  };
+
+  const divideByArchived = (list) => {
+    const archived = [];
+    const unarchived = [];
+    for (let item of list) {
+      if (item.is_archived) {
+        archived.push(item);
+      } else {
+        unarchived.push(item);
+      }
+    }
+    return { archived, unarchived };
   };
 
   const groupActivities = (list) => {
@@ -30,7 +46,6 @@ const useActivityApi = () => {
         }
         return acc;
       }, []);
-      setActivities(groupedList);
       const groupByDate = groupedList.reduce((groups, current) => {
         const formatedDate = formatDate(current.created_at);
         if (!groups[formatedDate]) {
@@ -40,26 +55,42 @@ const useActivityApi = () => {
         }
         return groups;
       }, {});
-      setGroupedActivities(groupByDate);
+      return groupByDate;
     }
   };
 
+  const processData = (list) => {
+    const { archived, unarchived } = divideByArchived(list);
+    const archivedGroup = groupActivities(archived);
+    setGroupedActivities(archivedGroup);
+    const unarchivedGroup = groupActivities(unarchived);
+    setGroupedArchivedActivities(unarchivedGroup);
+    setLoadingGroupedActivities(false);
+  };
+
   const getAll = () => {
+    setLoadingGroupedActivities(true);
     axios
       .get(`${BASE_URL}/activities`)
       .then((res) => {
-        groupActivities(res.data);
+        setActivities(res.data);
+        processData(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoadingGroupedActivities(false);
+      });
   };
 
   const getActivity = (id) => {
+    setLoadingActivity(true);
     axios
       .get(`${BASE_URL}/activities/${id}`)
       .then((result) => {
         setActivity(result.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoadingActivity(false));
   };
 
   const archiveAll = () => {
@@ -75,12 +106,29 @@ const useActivityApi = () => {
       .catch((err) => console.log(err));
   };
 
+  const unArchiveAll = () => {
+    const promises = [];
+    activities.forEach((a) => {
+      const promise = axios.post(`${BASE_URL}/activities/${a.id}`, {
+        is_archived: true
+      });
+      promises.push(promise);
+    });
+    Promise.all(promises)
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
   return {
+    loadingGroupedActivities,
     groupedActivities,
+    groupedArchivedActivities,
     activity,
+    loadingActivity,
     getAll,
     getActivity,
-    archiveAll
+    archiveAll,
+    unArchiveAll
   };
 };
 
