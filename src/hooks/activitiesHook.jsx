@@ -95,11 +95,11 @@ const useActivityApi = () => {
       .finally(() => setLoadingActivity(false));
   };
 
-  const archiveAll = () => {
+  const archive = (arr, value) => {
     const promises = [];
-    unarchived.forEach((a) => {
+    arr.forEach((a) => {
       const promise = axios.post(`${BASE_URL}/activities/${a.id}`, {
-        is_archived: true
+        is_archived: value
       });
       promises.push(promise);
     });
@@ -108,17 +108,14 @@ const useActivityApi = () => {
       .catch((err) => console.log(err));
   };
 
+  const archiveAll = () => {
+    archive(unarchived, true);
+    getAll();
+  };
+
   const unArchiveAll = () => {
-    const promises = [];
-    archived.forEach((a) => {
-      const promise = axios.post(`${BASE_URL}/activities/${a.id}`, {
-        is_archived: true
-      });
-      promises.push(promise);
-    });
-    Promise.all(promises)
-      .then(() => {})
-      .catch((err) => console.log(err));
+    archive(archived, false);
+    getAll();
   };
 
   return {
