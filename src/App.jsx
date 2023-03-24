@@ -6,7 +6,7 @@ import ActivityDetailPage from './pages/ActivityDetailPage/ActivityDetailPage.js
 import ActivityPage from './pages/ActivityPage/ActivityPage.jsx';
 import ArchivedPage from './pages/ArchivedPage/ArchivedPage.jsx';
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container, ContainerView } from './App.styles.jsx';
 
 const App = () => {
@@ -19,6 +19,7 @@ const App = () => {
             <Route path="/activity/:id" element={<ActivityDetailPage />} />
             <Route path="/" element={<ActivityPage />} />
             <Route path="/archived" element={<ArchivedPage />} />
+            <Route path="*" element={<ActivityPage />} />
           </Routes>
         </ContainerView>
       </Router>
