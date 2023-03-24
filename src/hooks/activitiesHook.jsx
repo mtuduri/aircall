@@ -110,7 +110,7 @@ const useActivityApi = () => {
 
   const archiveActivity = (id, value) => {
     return axios
-      .post(`${BASE_URL}/activities/${id}`, {
+      .patch(`${BASE_URL}/activities/${id}`, {
         is_archived: value
       })
       .catch((err) => {
@@ -122,7 +122,7 @@ const useActivityApi = () => {
   const archive = (arr, value) => {
     const promises = [];
     arr.forEach((a) => {
-      const promise = axios.post(`${BASE_URL}/activities/${a.id}`, {
+      const promise = axios.patch(`${BASE_URL}/activities/${a.id}`, {
         is_archived: value
       });
       promises.push(promise);
