@@ -1,5 +1,5 @@
 ## Preview
-![live demo](https://641cb7e2146ad2006e227d54--luminous-sunburst-4e80cc.netlify.app/)
+[live demo](https://luminous-sunburst-4e80cc.netlify.app/)
 
 ## Summary
 
