@@ -34,7 +34,7 @@ const ActivityListItem = ({ item }) => {
   const CallType = () => {
     switch (item.call_type) {
       case 'voicemail':
-        return <Voicemail style={{ color: 'red' }} />;
+        return <Voicemail />;
       case 'missed':
         if (item.direction === 'outbound') {
           return <PhoneMissed style={{ color: 'red' }} />;

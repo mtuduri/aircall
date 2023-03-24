@@ -27,7 +27,7 @@ const ActivityDetailpage = () => {
       {loadingActivity && <Loader />}
       {!loadingActivity && activity && (
         <Container>
-          <Link to="/">go back</Link>
+          <Link to={activity.is_archived ? '/archived' : '/'}>go back</Link>
           <Title>Activity details:</Title>
           <FieldContainer>
             <div>
