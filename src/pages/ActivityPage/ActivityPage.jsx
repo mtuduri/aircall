@@ -19,7 +19,6 @@ const Activitypage = () => {
           archiveFn={archiveAll}
           archiveText="Archive all calls"></ActivityList>
       )}
-      ;
     </React.Fragment>
   );
 };
